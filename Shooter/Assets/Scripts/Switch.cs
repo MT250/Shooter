@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Switch : MonoBehaviour, IInteractable
 {
     [SerializeField] private AudioClip interactionSound;
     [SerializeField] private Transform[] transforms;
+    [SerializeField] private UnityEvent unityEvent;
 
     private Light _light;
     private AudioSource _audioSource;
@@ -19,33 +21,14 @@ public class Switch : MonoBehaviour, IInteractable
     }
 
     public void Interact()
-    {
-        foreach (var item in transforms)
-        {
-            if (item != null)
-            {
-                if (item.GetComponent<Door>())
-                {
-                    item.GetComponent<Door>().LockUnlockDoor();
-                    break;
-                }
-                if (item.GetComponent<IInteractable>() != null)
-                    item.GetComponent<IInteractable>().Interact();
-            }
-        }
+    {        
+        unityEvent?.Invoke();
 
-        ChangeLight();
         PlaySound();
     }
 
     private void PlaySound()
     {
         _audioSource.Play();
-    }
-
-    private void ChangeLight()
-    {
-        if (_light.color == Color.green) _light.color = Color.red;
-            else _light.color = Color.green;
     }
 }
