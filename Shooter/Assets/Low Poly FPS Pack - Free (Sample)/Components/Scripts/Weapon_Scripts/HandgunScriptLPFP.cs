@@ -279,24 +279,28 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		AnimationCheck ();
 
 		//Play knife attack 1 animation when Q key is pressed
+		/*
 		if (Input.GetKeyDown (KeyCode.Q) && !isInspecting) 
 		{
 			anim.Play ("Knife Attack 1", 0, 0f);
 		}
+		*/
 		//Play knife attack 2 animation when F key is pressed
+		/*
 		if (Input.GetKeyDown (KeyCode.F) && !isInspecting) 
 		{
 			anim.Play ("Knife Attack 2", 0, 0f);
 		}
-			
+		*/
 		//Throw grenade when pressing G key
+		/*
 		if (Input.GetKeyDown (KeyCode.G) && !isInspecting) 
 		{
 			StartCoroutine (GrenadeSpawnDelay ());
 			//Play grenade throw animation
 			anim.Play("GrenadeThrow", 0, 0.0f);
 		}
-
+		*/
 		//If out of ammo
 		if (currentAmmo == 0) 
 		{
@@ -326,7 +330,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 
 		//Shooting 
-		if (Input.GetMouseButtonDown (0) && !outOfAmmo && !isReloading && !isInspecting && !isRunning) 
+		if (Input.GetMouseButtonDown (0) && !outOfAmmo && !isReloading && !isInspecting && !isRunning && !MenuController.isPaused) 
 		{
 			anim.Play ("Fire", 0, 0f);
 	
@@ -404,26 +408,27 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			anim.SetTrigger ("Inspect");
 		}
 
-		//Toggle weapon holster when pressing E key
-		//if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
-		//{
-		//	holstered = true;
+		//Toggle weapon holster when pressing E key 
+		/*
+		if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
+		{
+			holstered = true;
 
-		//	mainAudioSource.clip = SoundClips.holsterSound;
-		//	mainAudioSource.Play();
+			mainAudioSource.clip = SoundClips.holsterSound;
+			mainAudioSource.Play();
 
-		//	hasBeenHolstered = true;
-		//} 
-		//else if (Input.GetKeyDown (KeyCode.E) && hasBeenHolstered) 
-		//{
-		//	holstered = false;
+            hasBeenHolstered = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && hasBeenHolstered)
+        {
+            holstered = false;
 
-		//	mainAudioSource.clip = SoundClips.takeOutSound;
-		//	mainAudioSource.Play ();
+            mainAudioSource.clip = SoundClips.takeOutSound;
+            mainAudioSource.Play();
 
-		//	hasBeenHolstered = false;
-		//}
-		if (Input.GetKeyDown(KeyCode.E))
+            hasBeenHolstered = false;
+        }*/
+        if (Input.GetKeyDown(KeyCode.E))
         {
 			Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 3f);
 			if (hitInfo.transform.GetComponent<IInteractable>() != null)
